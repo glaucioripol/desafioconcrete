@@ -14,11 +14,10 @@ module.exports = {
         }
         return res.status(401).json({ auth: false, message: 'Usuário e/ou senha inválidos' })
     },
-
     async store(req, res) {
-
+        let { nome, email, senha, telefones } = req.body
+        let user = await Users.findOne({ email, nome })
     },
-
     async show(req, res) {
 
     }
