@@ -1,0 +1,29 @@
+{
+  "name": "desafio",
+  "version": "1.0.0",
+  "description": "Desafio para vaga de desenvolvedor node",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/glaucioripol/desafioconcrete.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongo",
+    "api",
+    "jwt",
+    "node",
+    "é",
+    "vida"
+  ],
+  "author": "Glaucio Ricardo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/glaucioripol/desafioconcrete/issues"
+  },
+  "homepage": "https://github.com/glaucioripol/desafioconcrete#readme"
+}
