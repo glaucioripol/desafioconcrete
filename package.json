@@ -4,6 +4,7 @@
   "description": "Desafio para vaga de desenvolvedor node",
   "main": "src/server.js",
   "scripts": {
+    "start": "nodemon src/Server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,7 +22,7 @@
     "vida"
   ],
   "author": "Glaucio Ricardo",
-  "license": "MIT",
+  "license": "any",
   "bugs": {
     "url": "https://github.com/glaucioripol/desafioconcrete/issues"
   },

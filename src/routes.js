@@ -6,3 +6,5 @@ Route
     .post("/signup")
     .post("/signin")
     .get("/user/:id", middleware)
+
+module.exports = Route
