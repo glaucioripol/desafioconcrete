@@ -9,11 +9,18 @@ module.exports = {
         let user = await Users.findOne({ email, senha })
         if (user) {
             const id = user._id //id do banco
-            let token = jwt.sign({ id }, secretKey, { expiresIn: 3000 })// com expiracao
+            let token = jwt.sign({ id }, secretKey, { expiresIn: 1800 })
             return res.status(200).json({ auth: true, token })
         }
         return res.status(401).json({ auth: false, message: 'Usuário e/ou senha inválidos' })
     },
 
+    async store(req, res) {
+
+    },
+
+    async show(req, res) {
+
+    }
 
 }
