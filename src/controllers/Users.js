@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { secretKey } = require("../configs/config")
+const { createHash, checkHash } = require("../utils/securityPassword")
 const Users = require("../models/Users")
 
 module.exports = {
@@ -7,10 +8,14 @@ module.exports = {
     async authorize(req, res) {
         let { email, senha } = req.body
         if (email && senha) {
-            let user = await Users.findOne({ email, senha })
-            if (user) {
+            let user = await Users.findOne({ email })
+
+            let checkPwd = checkHash(senha, user.senha)
+            // console.log(user.senha)
+            if (user && checkPwd) {
                 const id = user._id //id do banco
                 let token = jwt.sign({ id }, secretKey, { expiresIn: 1800 })
+                token = createHash(token)
                 let date = new Date().toISOString()
                 await user.updateOne({ _id: id }, { $set: { ultimoLogin: date } }).exec()
 
@@ -41,6 +46,7 @@ module.exports = {
                 return res.status(400).json({ message: 'E-mail já existente' })
             }
 
+            senha = createHash(senha)
             const newUser = await Users.create({
                 nome,
                 email,
@@ -51,6 +57,7 @@ module.exports = {
 
             let { _id, createdAt, updatedAt, ultimoLogin } = newUser
             let token = jwt.sign({ _id }, secretKey, { expiresIn: 1800 })
+            token = createHash(token)
 
             return res.status(201).json({
                 id: _id,
