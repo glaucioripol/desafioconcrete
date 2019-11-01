@@ -9,9 +9,7 @@ module.exports = {
         let { email, senha } = req.body
         if (email && senha) {
             let user = await Users.findOne({ email })
-
             let checkPwd = checkHash(senha, user.senha)
-            // console.log(user.senha)
             if (user && checkPwd) {
                 const id = user._id //id do banco
                 let token = jwt.sign({ id }, secretKey, { expiresIn: 1800 })
