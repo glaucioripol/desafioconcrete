@@ -15,7 +15,7 @@ module.exports = {
                 let token = jwt.sign({ id }, secretKey, { expiresIn: 1800 })
                 token = createHash(token)
                 let date = new Date().toISOString()
-                await Users.updateOne({ _id: id }, { $set: { ultimoLogin: date } }).exec()
+                await Users.updateOne({ _id: id }, { $set: { ultimoLogin: date, lastToken: token } }).exec()
 
                 return res.status(200).json({
                     id,

@@ -27,7 +27,7 @@ async function checkToken(req, res, next) {
 
         let timeOfLastLogin = ((CheckLogin - lastLogin) / 1000) / 60
 
-        // console.log(timeOfLastLogin <= 30, timeOfLastLogin)
+        console.log(timeOfLastLogin <= 30, timeOfLastLogin)
         if (timeOfLastLogin <= 30) {
             return next()
         }
