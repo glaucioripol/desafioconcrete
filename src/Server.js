@@ -26,7 +26,7 @@ app
     .use(express.json())
     .use(express.urlencoded({ extended: false }))
     .use(cookieParser())
-    .use("/api/v1", Routes)
+    .use("/api", Routes)
     .get("/", (req, res) => res.json({
         Application: "on",
         Homolog: true,
