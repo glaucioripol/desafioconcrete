@@ -16,7 +16,25 @@ module.exports = {
     },
     async store(req, res) {
         let { nome, email, senha, telefones } = req.body
-        let user = await Users.findOne({ email, nome })
+
+        if (nome && email && senha && telefones) {
+            let user = await Users.findOne({ email })
+
+            if (user) {
+                return res.status(400).json({ message: 'E-mail já existente' })
+            }
+
+            const newUser = await Users.create({
+                nome,
+                email,
+                senha,
+                telefones
+            })
+
+            return res.status(201).json({ newUser })
+        }
+
+        return res.status(400).json({ message: "Dados para cadastros incorretos" })
     },
     async show(req, res) {
 
