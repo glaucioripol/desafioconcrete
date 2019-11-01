@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 const { secretKey } = require("../configs/config")
-const { createHash, checkHash } = require("../utils/securityPassword")
+const { createHash, checkHash } = require("../utils/methodsWithHash")
 const Users = require("../models/Users")
 
 module.exports = {
@@ -15,19 +15,18 @@ module.exports = {
                 let token = jwt.sign({ id }, secretKey, { expiresIn: 1800 })
                 token = createHash(token)
                 let date = new Date().toISOString()
-                await user.updateOne({ _id: id }, { $set: { ultimoLogin: date } }).exec()
+                await Users.updateOne({ _id: id }, { $set: { ultimoLogin: date } }).exec()
 
                 return res.status(200).json({
                     id,
                     nome: user.nome,
                     email: user.email,
-                    telefones: user.telefones,
                     ultimoLogin: date,
                     dataCriacao: user.createdAt,
                     dataAtualizacao: user.updatedAt,
-                    token
+                    token,
+                    telefones: user.telefones
                 })
-
             }
         }
 
@@ -49,6 +48,7 @@ module.exports = {
                 nome,
                 email,
                 senha,
+                lastToken: "",
                 ultimoLogin: new Date().toISOString(),
                 telefones
             })
@@ -56,16 +56,17 @@ module.exports = {
             let { _id, createdAt, updatedAt, ultimoLogin } = newUser
             let token = jwt.sign({ _id }, secretKey, { expiresIn: 1800 })
             token = createHash(token)
+            await Users.updateOne({ _id }, { $set: { lastToken: token } }).exec()
 
             return res.status(201).json({
                 id: _id,
                 nome,
                 email,
-                telefones,
                 ultimoLogin,
                 dataCriacao: createdAt,
                 dataAtualizacao: updatedAt,
-                token
+                token,
+                telefones
             })
 
         }
@@ -73,7 +74,8 @@ module.exports = {
         return res.status(400).json({ message: "Dados para cadastros incorretos" })
     },
     async show(req, res) {
-        req, res
+        // req, res
+        return res.status(220).send("<h1>Carai borracha</h1>")
     }
 
 }
