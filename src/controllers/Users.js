@@ -28,7 +28,7 @@ module.exports = {
                 nome, email,
                 senha, telefones
             })
-            
+
             return res.status(201).json({ newUser })
         }
 
