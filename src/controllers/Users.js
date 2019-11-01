@@ -74,8 +74,10 @@ module.exports = {
         return res.status(400).json({ message: "Dados para cadastros incorretos" })
     },
     async show(req, res) {
-        // req, res
-        return res.status(220).send("<h1>Carai borracha</h1>")
+        
+        let id = req.params.id
+        let user = await Users.findOne({_id: id})
+        return res.status(200).json({user})
     }
 
 }
