@@ -25,12 +25,10 @@ module.exports = {
             }
 
             const newUser = await Users.create({
-                nome,
-                email,
-                senha,
-                telefones
+                nome, email,
+                senha, telefones
             })
-
+            
             return res.status(201).json({ newUser })
         }
 
