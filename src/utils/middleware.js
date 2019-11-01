@@ -18,7 +18,7 @@ function verifyJWT(req, res, next) {
 
 async function checkToken(req, res, next) {
     let token = req.headers.bearer
-    if (!token) return res.status(403).json({ auth: false, message: 'Não autorizado' })
+    if (!token) return res.status(403).json({ message: 'Não autorizado' })
 
     let user = await Users.findOne({ lastToken: token })
     if (user) {
@@ -27,13 +27,13 @@ async function checkToken(req, res, next) {
 
         let timeOfLastLogin = ((CheckLogin - lastLogin) / 1000) / 60
 
-        console.log(timeOfLastLogin <= 30, timeOfLastLogin)
+        // console.log(timeOfLastLogin <= 30, timeOfLastLogin)
         if (timeOfLastLogin <= 30) {
             return next()
         }
     }
 
-    return res.status(403).json({ auth: false, message: 'Sessão inválida' })
+    return res.status(403).json({ message: 'Sessão inválida' })
 }
 
 module.exports = checkToken
