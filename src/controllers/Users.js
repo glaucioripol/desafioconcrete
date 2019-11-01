@@ -40,8 +40,8 @@ module.exports = {
                 email,
                 telefones,
                 ultimoLogin,
-                createdAt,
-                updatedAt,
+                dataCriacao: createdAt,
+                dataAtualizacao: updatedAt,
                 token
             })
 
