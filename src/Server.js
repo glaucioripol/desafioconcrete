@@ -38,6 +38,6 @@ app
         }
     }))
 
-app.listen(port, () => console.log(`API on in: http://127.0.0.1:${port}/api/v1`))
-// const server = http.createServer(app)
-// server.listen(port, () => console.log(`API on in: http://127.0.0.1:${port}/api/v1`))
+
+const server = http.createServer(app)
+server.listen(port, () => console.log(`API on in: http://127.0.0.1:${port}/api/v1`))
