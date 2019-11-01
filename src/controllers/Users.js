@@ -29,13 +29,15 @@ module.exports = {
                 senha, telefones
             })
 
-            return res.status(201).json({ newUser })
+            let { _id, createdAt, updatedAt } = newUser
+
+            return res.status(201).json({ id: _id, nome, email, telefones, createdAt, updatedAt })
         }
 
         return res.status(400).json({ message: "Dados para cadastros incorretos" })
     },
     async show(req, res) {
-
+        req, res
     }
 
 }
