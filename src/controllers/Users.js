@@ -25,13 +25,26 @@ module.exports = {
             }
 
             const newUser = await Users.create({
-                nome, email,
-                senha, telefones
+                nome,
+                email,
+                senha,
+                ultimoLogin: new Date().toISOString(),
+                telefones
             })
 
-            let { _id, createdAt, updatedAt } = newUser
+            let { _id, createdAt, updatedAt, ultimoLogin } = newUser
+            let token = jwt.sign({ _id }, secretKey, { expiresIn: 1800 })
+            return res.status(201).json({
+                id: _id,
+                nome,
+                email,
+                telefones,
+                ultimoLogin,
+                createdAt,
+                updatedAt,
+                token
+            })
 
-            return res.status(201).json({ id: _id, nome, email, telefones, createdAt, updatedAt })
         }
 
         return res.status(400).json({ message: "Dados para cadastros incorretos" })

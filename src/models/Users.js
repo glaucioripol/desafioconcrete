@@ -4,6 +4,7 @@ const UserSchema = new Schema({
     nome: String,
     email: String,
     senha: String,
+    ultimoLogin: Date,
     telefones: [Object]
 }, {
     timestamps: true
